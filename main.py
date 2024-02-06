@@ -18,9 +18,10 @@ def load_config():
                 "url": "http://moodle-cdo.kemsu.ru/login/index.php",
                 "username": "",
                 "password": "",
-                "course_title": "геоинформатика",
+                "course_title": "ГЕОИНФОРМАТИКА",
+                "theme_string": "Знакомство с ГИС- системами"
             }, c, indent=4, ensure_ascii=False)
-            print(f"Конфиг не найден\nСоздан {os.getcwd()}/config.json, введите туда недостающие данные")
+            print(f"Конфиг не найден\nСоздан {os.path.join(os.getcwd(), "config.json")}, введите туда недостающие данные")
             exit(1)
     return config
 
@@ -50,7 +51,7 @@ def open_page(driver, config):
         print("logged in")
     except:
         driver.get_screenshot_as_file("./screen.png")
-        print(f"Что-то пошло не так, проверьте {os.getcwd()}/screen.png")
+        print(f"Что-то пошло не так, проверьте {os.path.join(os.getcwd(), "screen.png")}")
 
     driver.find_element(By.LINK_TEXT, config["course_title"]).click()
 
@@ -59,7 +60,7 @@ def open_page(driver, config):
         print("succ ess")
     except:
         driver.get_screenshot_as_file("./screen.png")
-        print(f"Что-то пошло не так, проверьте {os.getcwd()}/screen.png")
+        print(f"Что-то пошло не так, проверьте {os.path.join(os.getcwd(), "screen.png")}")
 
 def keep_alive():
     print("сделать скриншот - enter\nвыйти - написать exit")
@@ -69,7 +70,7 @@ def keep_alive():
             exit()
         else:
             driver.get_screenshot_as_file("./screen.png")
-            print(f"скриншот сохранен {os.getcwd()}/screen.png")
+            print(f"скриншот сохранен {os.path.join(os.getcwd(), "screen.png")}")
             continue
 
 if __name__ == "__main__":
