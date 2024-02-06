@@ -64,12 +64,14 @@ def open_page(driver, config):
         print(f"Что-то пошло не так, проверьте {os.path.join(os.getcwd(), "screen.png")}")
 
 def keep_alive():
-    print("\nвремя сессии - time\nсделать скриншот - screen\nвыйти - exit")
+    print("\nвремя сессии - time\nобновить страницу - refresh\nсделать скриншот - screen\nвыйти - exit")
     start = time.time()
     while True:
         a = input()
         if "exit" in a:
             exit()
+        elif "refresh" in a:
+            driver.refresh()
         elif "screen" in a:
             driver.get_screenshot_as_file("./screen.png")
             print(f"скриншот сохранен {os.path.join(os.getcwd(), "screen.png")}")
