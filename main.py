@@ -1,6 +1,7 @@
 import json
 import os
 import time
+from datetime import timedelta
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -63,14 +64,18 @@ def open_page(driver, config):
         print(f"Что-то пошло не так, проверьте {os.path.join(os.getcwd(), "screen.png")}")
 
 def keep_alive():
-    print("сделать скриншот - enter\nвыйти - написать exit")
+    print("\nвремя сессии - time\nсделать скриншот - screen\nвыйти - exit")
+    start = time.time()
     while True:
         a = input()
         if "exit" in a:
             exit()
-        else:
+        elif "screen" in a:
             driver.get_screenshot_as_file("./screen.png")
             print(f"скриншот сохранен {os.path.join(os.getcwd(), "screen.png")}")
+        elif "time" in a:
+            print(f"прошло {timedelta(seconds=time.time() - start)}")
+        else:
             continue
 
 if __name__ == "__main__":
